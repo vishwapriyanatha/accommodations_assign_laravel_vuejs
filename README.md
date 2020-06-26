@@ -12,7 +12,7 @@
 - **composer install**
 - **npm install** or **yarn**
 - **npm run dev** or **yarn dev**
-- you can **php artisan migrate:refresh --seed** or import database in **db** folder
+- you can **php artisan migrate:refresh --seed**
 - **php artisan serve**
 
 ## Login
