@@ -1,0 +1,1 @@
+# accommodations_assign_laravel_vuejs
