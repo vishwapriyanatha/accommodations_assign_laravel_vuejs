@@ -236,7 +236,7 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -509,12 +509,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1593053949438</updated>
-      <workItem from="1593053951730" duration="30601000" />
+      <workItem from="1593053951730" duration="30866000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30601000" />
+    <option name="totallyTimeSpent" value="30866000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
