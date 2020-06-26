@@ -12,7 +12,7 @@
 - **composer install**
 - **npm install** or **yarn**
 - **npm run dev** or **yarn dev**
-- you can **php artisan migrate:refresh --seed**
+- **php artisan migrate:refresh --seed**
 - **php artisan serve**
 
 ## Login
