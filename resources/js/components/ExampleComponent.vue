@@ -48,6 +48,10 @@
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Accommodation</v-toolbar-title>
+            <select @change="logoutUser" style="margin-left: 548px">
+                <option disabled selected>{{ddl_label}}</option>
+                <option>Logout</option>
+            </select>
         </v-app-bar>
 
         <v-main>
@@ -63,7 +67,7 @@
                 color="indigo"
                 app
         >
-            <span class="white--text">&copy; 2020</span>
+            <span class="white--text">&copy; {{current_year}}</span>
         </v-footer>
     </v-app>
 </template>
@@ -75,6 +79,21 @@
         },
         data: () => ({
             drawer: null,
+            ddl_label: '',
+            current_year: ''
         }),
+        methods: {
+            logoutUser() {
+                window.location = '/logout?redirect=/';
+            }
+        },
+        mounted() {
+            let self = this;
+            axios.get('/user').then((response) => {
+                self.ddl_label = response.data['user']
+            });
+            let d = new Date();
+            self.current_year = d.getFullYear();
+        }
     }
 </script>

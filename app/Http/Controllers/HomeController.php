@@ -95,4 +95,10 @@ class HomeController extends Controller
 
         return $return;
     }
+
+    public function getLogUserData()
+    {
+        $data['user'] = \Auth::user()->name;
+        return $data;
+    }
 }

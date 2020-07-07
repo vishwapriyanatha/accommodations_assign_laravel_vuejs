@@ -14,11 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->intended('login');
 });
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
+    //logout
+    Route::get('logout', 'IndexController@logout')->name('force.logout');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/user', 'HomeController@getLogUserData')->name('home');
     Route::get('/title', 'ResidentController@getTitle')->name('get.title');
     Route::get('/accommodation_data', 'HomeController@getAccomodationData')->name('get.accommodation.data');
 

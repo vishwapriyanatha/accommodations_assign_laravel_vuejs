@@ -1978,14 +1978,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
   },
   data: function data() {
     return {
-      drawer: null
+      drawer: null,
+      ddl_label: '',
+      current_year: ''
     };
+  },
+  methods: {
+    logoutUser: function logoutUser() {
+      window.location = '/logout?redirect=/';
+    }
+  },
+  mounted: function mounted() {
+    var self = this;
+    axios.get('/user').then(function (response) {
+      self.ddl_label = response.data['user'];
+    });
+    var d = new Date();
+    self.current_year = d.getFullYear();
   }
 });
 
@@ -38855,7 +38874,22 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v("Accommodation")])
+          _c("v-toolbar-title", [_vm._v("Accommodation")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticStyle: { "margin-left": "548px" },
+              on: { change: _vm.logoutUser }
+            },
+            [
+              _c("option", { attrs: { disabled: "", selected: "" } }, [
+                _vm._v(_vm._s(_vm.ddl_label))
+              ]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Logout")])
+            ]
+          )
         ],
         1
       ),
@@ -38874,7 +38908,9 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("v-footer", { attrs: { color: "indigo", app: "" } }, [
-        _c("span", { staticClass: "white--text" }, [_vm._v("© 2020")])
+        _c("span", { staticClass: "white--text" }, [
+          _vm._v("© " + _vm._s(_vm.current_year))
+        ])
       ])
     ],
     1
