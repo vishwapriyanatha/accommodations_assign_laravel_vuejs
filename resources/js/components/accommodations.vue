@@ -93,32 +93,41 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" v-model="formData.id"/>
-                        <div class="form-group">
-                            <label>Residence*</label>
-                            <select v-model="formData.residences_id" class="form-control">
-                                <option v-for="ddlResidence in ddlResidences" v-bind:value="ddlResidence.id">
-                                    {{ddlResidence.title}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Resident*</label>
-                            <select v-model="formData.resident_id" class="form-control">
-                                <option v-for="ddlResident in ddlResidents" v-bind:value="ddlResident.id">
-                                    {{ddlResident.name}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <v-col class="text-right" cols="12" sm="4">
-                            <div class="my-2">
-                                <v-btn v-if="hideSaveBtn" small color="primary" @click="addAccommodation">save</v-btn>
-                                <v-btn v-if="!hideSaveBtn" small color="primary" @click="updateAccommodation">update
-                                </v-btn>
-                            </div>
-                        </v-col>
+                        <ValidationObserver ref="observer" tag="form" v-slot="{handleSubmit}">
+                            <form @submit.prevent="handleSubmit(submitForm)">
+                                <input type="hidden" v-model="formData.id"/>
+                                <div class="form-group">
+                                    <label>Residence*</label>
+                                    <ValidationProvider name="Residence" rules="required" v-slot="{ errors }">
+                                        <select v-model="formData.residences_id" class="form-control">
+                                            <option v-for="ddlResidence in ddlResidences"
+                                                    v-bind:value="ddlResidence.id">
+                                                {{ddlResidence.title}}
+                                            </option>
+                                            <span>{{ errors[0] }}</span>
+                                        </select>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-group">
+                                    <label>Resident*</label>
+                                    <ValidationProvider name="Resident" rules="required" v-slot="{ errors }">
+                                        <select v-model="formData.resident_id" class="form-control">
+                                            <option v-for="ddlResident in ddlResidents" v-bind:value="ddlResident.id">
+                                                {{ddlResident.name}}
+                                            </option>
+                                        </select>
+                                        <span>{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
+
+                                <v-col class="text-right" cols="12" sm="4">
+                                    <div class="my-2">
+                                        <v-btn small color="primary" type="submit">{{(hideSaveBtn)?'save':'update'}}
+                                        </v-btn>
+                                    </div>
+                                </v-col>
+                            </form>
+                        </ValidationObserver>
                     </div>
                 </div>
             </div>
@@ -127,8 +136,12 @@
 </template>
 
 <script>
+
+    import swal from 'sweetalert';
+
     export default {
         name: "accommodations",
+        components: {},
         data() {
             return {
                 hideSaveBtn: true,
@@ -153,7 +166,7 @@
                         text: 'Residences',
                         align: 'start',
                         sortable: false,
-                        value: 'residences.name',
+                        value: 'residences.title',
                     },
                     {
                         text: 'Resident',
@@ -170,6 +183,25 @@
                     self.desserts = response.data;
                 });
             },
+            submitForm() {
+                let self = this;
+                if (self.hideSaveBtn) {
+                    self.addAccommodation();
+                } else {
+                    self.updateAccommodation();
+                }
+            },
+            resetFrom() {
+                this.formData.id = 0;
+                this.formData.status = 'active';
+                this.formData.residences_id = this.formData.resident_id = '';
+            },
+            openModel() {
+                this.$refs.observer.reset();
+                this.resetFrom();
+                this.getData();
+                $('#manage_accommodations').modal('show');
+            },
             addAccommodation() {
                 delete this.formData.id;
                 axios.post('/accommodation', this.formData);
@@ -185,25 +217,38 @@
             openAccommodation() {
                 let self = this;
                 self.hideSaveBtn = true;
-                self.getData();
-                $('#manage_accommodations').modal('show')
+                self.openModel()
             },
             itemAction(type, itemAction) {
                 let self = this;
+                this.formData.id = itemAction.id;
                 if (type == 'edit') {
-                    self.hideSaveBtn = true;
+                    self.hideSaveBtn = false;
+                    self.openModel();
                     axios.get('/accommodation/' + itemAction.id).then((response) => {
                         delete response.data.created_at;
                         delete response.data.updated_at;
                         Object.keys(response.data).forEach(function (key) {
                             self.formData[key] = response.data[key];
                         });
-                        self.getData();
-                        $('#manage_accommodations').modal('show')
                     });
                 } else {
-                    this.formData.status = 'inactive';
-                    axios.put('/accommodation/' + this.formData.id, this.formData);
+                    swal({
+                        title: "Are you sure?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                axios.put('/accommodation/' + this.formData.id, {'status': 'inactive'}).then((res) => {
+                                    swal("recode update", "", "success");
+                                });
+
+                            } else {
+                                swal("Action cancel");
+                            }
+                        });
                 }
 
             },

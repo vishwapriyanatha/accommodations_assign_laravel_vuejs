@@ -55,41 +55,63 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" v-model="formData.id"/>
-                        <div class="form-group">
-                            <label>Title*</label>
-                            <select v-model="formData.title" class="form-control">
-                                <option v-for="titleDdl in titlesDdl" v-bind:value="titleDdl.id">{{titleDdl.name}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Name*</label>
-                            <input type="text" v-model="formData.name" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Date of Birth*</label>
-                            <input type="text" v-model="formData.date_of_birth" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>NIC Number*</label>
-                            <input type="text" v-model="formData.nic_number" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Mobile Number*</label>
-                            <input type="text" v-model="formData.mobile_number" class="form-control"/>
-                        </div>
+                    <ValidationObserver ref="observer" tag="form" v-slot="{handleSubmit}">
+                        <form @submit.prevent="handleSubmit(submitForm)">
+                            <div class="modal-body">
 
-                    </div>
-                    <div class="modal-footer">
-                        <v-col class="text-right" cols="12" sm="4">
-                            <div class="my-2">
-                                <v-btn v-if="hideSaveBtn" small color="primary" @click="addResident">save</v-btn>
-                                <v-btn v-if="!hideSaveBtn" small color="primary" @click="updateResident">update</v-btn>
+                                <input type="hidden" v-model="formData.id"/>
+                                <div class="form-group">
+                                    <label>Title*</label>
+                                    <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
+                                        <select v-model="formData.title" class="form-control">
+                                            <option v-for="titleDdl in titlesDdl" v-bind:value="titleDdl.id">
+                                                {{titleDdl.name}}
+                                            </option>
+                                        </select>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name*</label>
+                                    <ValidationProvider rules="required" name="Name" v-slot="{ errors }">
+                                        <input type="text" v-model="formData.name" class="form-control"/>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of Birth*</label>
+                                    <ValidationProvider rules="required" name="Date of Birth" v-slot="{ errors }">
+                                        <input type="text" v-model="formData.date_of_birth" class="form-control"/>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-group">
+                                    <label>NIC Number*</label>
+                                    <ValidationProvider rules="required" name="NIC Number" v-slot="{ errors }">
+                                        <input type="text" v-model="formData.nic_number" class="form-control"/>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile Number*</label>
+                                    <ValidationProvider rules="required" name="Mobile Number" v-slot="{ errors }">
+                                        <input type="text" v-model="formData.mobile_number" class="form-control"/>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
+
                             </div>
-                        </v-col>
-                    </div>
+                            <div class="modal-footer">
+                                <v-col class="text-right" cols="12" sm="4">
+                                    <div class="my-2">
+                                        <v-btn small color="primary" type="submit">{{(hideSaveBtn)?'save':'update'}}
+                                        </v-btn>
+                                    </div>
+                                </v-col>
+                            </div>
+
+                        </form>
+                    </ValidationObserver>
                 </div>
             </div>
         </div>
@@ -171,23 +193,40 @@
                     self.titlesDdl = response.data
                 });
             },
+            submitForm() {
+                let self = this;
+                if (self.hideSaveBtn) {
+                    self.addResident();
+                } else {
+                    self.updateResident();
+                }
+            },
+            resetFrom() {
+                this.formData.id = 0;
+                this.formData.title = this.formData.name = this.formData.date_of_birth = this.formData.nic_number = this.formData.mobile_number = '';
+            },
+            openModel() {
+                this.getTitle();
+                this.$refs.observer.reset();
+                this.resetFrom();
+                $('#manage_resident').modal('show')
+            },
             openResident() {
                 let self = this;
                 self.hideSaveBtn = true;
-                self.getTitle();
-                $('#manage_resident').modal('show')
+                this.openModel()
             },
             itemAction(itemAction) {
                 let self = this;
-                self.hideSaveBtn = true;
+                self.openModel();
+                self.hideSaveBtn = false;
                 axios.get('/resident/' + itemAction.id).then((response) => {
                     delete response.data.created_at;
                     delete response.data.updated_at;
                     Object.keys(response.data).forEach(function (key) {
                         self.formData[key] = response.data[key];
                     });
-                    self.getTitle();
-                    $('#manage_resident').modal('show')
+
                 });
             },
             updateResident() {
@@ -202,5 +241,7 @@
 </script>
 
 <style scoped>
-
+    .btn-hid {
+        display: none;
+    }
 </style>

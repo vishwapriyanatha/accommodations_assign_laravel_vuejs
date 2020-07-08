@@ -10928,3 +10928,8 @@ a.text-dark:focus {
   }
 }
 
+.error-font {
+  font-size: 10px;
+  color: #ff0312;
+}
+

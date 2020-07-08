@@ -6,8 +6,12 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
+import {ValidationProvider, ValidationObserver, extend} from 'vee-validate/dist/vee-validate.full.min';
 
+window.Vue = require('vue');
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
 import vuetify from './plugins/vuetify'
 import router from './router';
 

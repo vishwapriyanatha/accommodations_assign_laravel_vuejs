@@ -18,3 +18,8 @@
 ## Login
 - *user name:* **vishwapriyanatha@gmail.com**
 - *Password:* **Abcd!234**
+
+## npm use packages
+- <a href="https://logaretm.github.io/vee-validate/">vee validate 3.0</a>
+- <a href="https://sweetalert.js.org/">sweetalert</a>
+- axios

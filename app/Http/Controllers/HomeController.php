@@ -68,7 +68,9 @@ class HomeController extends Controller
     public function updateResidence($id, Request $request)
     {
         try {
-            return $this->ResidentResidence->where('id', $id)->update($request->all());
+            return $this->ResidentResidence
+                ->where('id', $id)
+                ->update($request->all());
         } catch (\Exception $exception) {
             return false;
         }
@@ -79,18 +81,23 @@ class HomeController extends Controller
      */
     public function getAllResidence()
     {
-        return $this->ResidentResidence->with(['residences', 'resident'])->get();
+        return $this->ResidentResidence
+            ->where('status', 'active')
+            ->with(['residences', 'resident'])
+            ->get();
     }
 
     public function getAccomodationData()
     {
         $return['resident'] = $this->Resident->select('residents.name', 'residents.id')
             ->leftjoin('resident_residences', 'resident_residences.resident_id', 'residents.id')
-//            ->where('resident_residences.status', 'active')
+            ->whereNull('resident_residences.status')
+            ->orWhere('resident_residences.status', '!=', 'active')
             ->get();
         $return['residence'] = $this->Residence->select('residences.title', 'residences.id')
             ->leftjoin('resident_residences', 'resident_residences.residences_id', 'residences.id')
-//            ->where('resident_residences.status', 'active')
+            ->whereNull('resident_residences.status')
+            ->orWhere('resident_residences.status', '!=', 'active')
             ->get();
 
         return $return;

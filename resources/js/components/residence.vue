@@ -55,26 +55,36 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" v-model="formData.id"/>
-                        <div class="form-group">
-                            <label>Title*</label>
-                            <input type="text" v-model="formData.title" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Address*</label>
-                            <input type="text" v-model="formData.address" class="form-control"/>
-                        </div>
+                    <ValidationObserver ref="observer" tag="form" v-slot="{handleSubmit}">
+                        <form @submit.prevent="handleSubmit(submitForm)">
+                            <div class="modal-body">
+                                <input type="hidden" v-model="formData.id"/>
+                                <div class="form-group">
+                                    <label>Title*</label>
+                                    <ValidationProvider rules="required" name="Title" v-slot="{ errors }">
+                                        <input type="text" v-model="formData.title" class="form-control"/>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address*</label>
+                                    <ValidationProvider rules="required" name="Address" v-slot="{ errors }">
+                                        <input type="text" v-model="formData.address" class="form-control"/>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <v-col class="text-right" cols="12" sm="4">
-                            <div class="my-2">
-                                <v-btn v-if="hideSaveBtn" small color="primary" @click="addResidence">save</v-btn>
-                                <v-btn v-if="!hideSaveBtn" small color="primary" @click="updateResidence">update</v-btn>
                             </div>
-                        </v-col>
-                    </div>
+                            <div class="modal-footer">
+                                <v-col class="text-right" cols="12" sm="4">
+                                    <div class="my-2">
+                                        <v-btn small color="primary" type="submit">{{(hideSaveBtn)?'save':'update'}}
+                                        </v-btn>
+                                    </div>
+                                </v-col>
+                            </div>
+                        </form>
+                    </ValidationObserver>
                 </div>
             </div>
         </div>
@@ -123,25 +133,42 @@
                     self.desserts = response.data;
                 });
             },
+            submitForm() {
+                let self = this;
+                if (self.hideSaveBtn) {
+                    self.addResidence();
+                } else {
+                    self.updateResidence();
+                }
+            },
+            resetFrom() {
+                this.formData.id = 0;
+                this.formData.title = this.formData.address = '';
+            },
+            openModel() {
+                this.$refs.observer.reset();
+                this.resetFrom();
+                $('#manage_residence').modal('show')
+            },
             addResidence() {
                 delete this.formData.id;
                 axios.post('/residence', this.formData);
                 $('#manage_residence').modal('hide')
             },
             openResidence() {
-                self.hideSaveBtn = true;
-                $('#manage_residence').modal('show')
+                this.hideSaveBtn = true;
+                this.openModel();
             },
             itemAction(itemAction) {
                 let self = this;
                 self.hideSaveBtn = false;
+                self.openModel();
                 axios.get('/residence/' + itemAction.id).then((response) => {
                     delete response.data.created_at;
                     delete response.data.updated_at;
                     Object.keys(response.data).forEach(function (key) {
                         self.formData[key] = response.data[key];
                     });
-                    $('#manage_residence').modal('show')
                 });
             },
             updateResidence() {
