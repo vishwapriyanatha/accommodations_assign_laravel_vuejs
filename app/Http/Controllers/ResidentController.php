@@ -3,23 +3,86 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Title;
-use App\Resident;
+use App\Http\Services\Resident\ResidentService;
+
 
 class ResidentController extends Controller
 {
-    private $Title;
-    private $Resident;
+    private $residentService;
 
     /**
      * ResidentController constructor.
-     * @param Title $Title
-     * @param Resident $Resident
+     *
+     * @param ResidentService $residentService
      */
-    public function __construct(Title $Title, Resident $Resident)
+    public function __construct(ResidentService $residentService)
     {
-        $this->Title = $Title;
-        $this->Resident = $Resident;
+        $this->residentService = $residentService;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return mixed
+     */
+    public function index()
+    {
+        return $this->residentService->index();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return mixed
+     */
+    public function create()
+    {
+        return $this->residentService->create();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        return $this->residentService->store($request->all());
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function show($id)
+    {
+        return $this->residentService->show($id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function edit($id)
+    {
+        return $this->residentService->edit($id);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function update(Request $request, $id)
+    {
+        return $this->residentService->update($request->all(), $id);
     }
 
     /**
@@ -27,50 +90,7 @@ class ResidentController extends Controller
      */
     public function getTitle()
     {
-        return $this->Title->get();
+        return $this->residentService->getTitle();
     }
 
-    /**
-     * @param Request $request
-     * @return bool
-     */
-    public function saveResident(Request $request)
-    {
-        try {
-            return $this->Resident->create($request->all());
-        } catch (\Exception $exception) {
-            return false;
-        }
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getResident($id)
-    {
-        return $this->Resident->where('id', $id)->first();
-    }
-
-    /**
-     * @param $id
-     * @param Request $request
-     * @return bool
-     */
-    public function updateResident($id, Request $request)
-    {
-        try {
-            return $this->Resident->where('id', $id)->update($request->all());
-        } catch (\Exception $exception) {
-            return false;
-        }
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
-     */
-    public function getAllResident()
-    {
-        return $this->Resident->with('resident_title')->get();
-    }
 }

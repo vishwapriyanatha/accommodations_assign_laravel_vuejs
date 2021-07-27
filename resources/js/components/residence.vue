@@ -78,7 +78,8 @@
                             <div class="modal-footer">
                                 <v-col class="text-right" cols="12" sm="4">
                                     <div class="my-2">
-                                        <v-btn small color="primary" type="submit">{{(hideSaveBtn)?'save':'update'}}
+                                        <v-btn small color="primary" type="submit">
+                                            {{ (hideSaveBtn)?'save':'update' }}
                                         </v-btn>
                                     </div>
                                 </v-col>

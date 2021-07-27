@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\Residence\ResidenceService;
+use App\Http\Services\Accommodation\AccommodationService;
 
-class ResidenceController extends Controller
+class AccommodationController extends Controller
 {
-    private $residenceService;
+    private $accommodation;
 
     /**
-     * ResidenceController constructor.
+     * AccommodationController constructor.
      *
-     * @param ResidenceService $residenceService
+     * @param AccommodationService $accommodation
      */
-    public function __construct(ResidenceService $residenceService)
+    public function __construct(AccommodationService $accommodation)
     {
-        $this->residenceService = $residenceService;
+        $this->accommodation = $accommodation;
     }
 
     /**
@@ -26,7 +26,7 @@ class ResidenceController extends Controller
      */
     public function index()
     {
-        return $this->residenceService->index();
+        return $this->accommodation->index();
     }
 
     /**
@@ -36,7 +36,7 @@ class ResidenceController extends Controller
      */
     public function create()
     {
-        return $this->residenceService->create();
+        return $this->accommodation->create();
     }
 
     /**
@@ -47,7 +47,7 @@ class ResidenceController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->residenceService->store($request->all());
+        return $this->accommodation->store($request->all());
     }
 
     /**
@@ -58,7 +58,7 @@ class ResidenceController extends Controller
      */
     public function show($id)
     {
-        return $this->residenceService->show($id);
+        return $this->accommodation->show($id);
     }
 
     /**
@@ -69,7 +69,7 @@ class ResidenceController extends Controller
      */
     public function edit($id)
     {
-        return $this->residenceService->edit($id);
+        return $this->accommodation->edit($id);
     }
 
     /**
@@ -81,6 +81,14 @@ class ResidenceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->residenceService->update($request->all(),$id);
+        return $this->accommodation->update($request->all(), $id);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccommodationData()
+    {
+        return $this->accommodation->getAccommodationData();
     }
 }

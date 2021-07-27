@@ -65,7 +65,7 @@
                                     <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
                                         <select v-model="formData.title" class="form-control">
                                             <option v-for="titleDdl in titlesDdl" v-bind:value="titleDdl.id">
-                                                {{titleDdl.name}}
+                                                {{ titleDdl.name }}
                                             </option>
                                         </select>
                                         <span class="error-font">{{ errors[0] }}</span>
@@ -104,7 +104,8 @@
                             <div class="modal-footer">
                                 <v-col class="text-right" cols="12" sm="4">
                                     <div class="my-2">
-                                        <v-btn small color="primary" type="submit">{{(hideSaveBtn)?'save':'update'}}
+                                        <v-btn small color="primary" type="submit">
+                                            {{ (hideSaveBtn)?'save':'update' }}
                                         </v-btn>
                                     </div>
                                 </v-col>
@@ -241,7 +242,5 @@
 </script>
 
 <style scoped>
-    .btn-hid {
-        display: none;
-    }
+
 </style>

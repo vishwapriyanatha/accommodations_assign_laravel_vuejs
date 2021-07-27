@@ -102,7 +102,7 @@
                                         <select v-model="formData.residences_id" class="form-control">
                                             <option v-for="ddlResidence in ddlResidences"
                                                     v-bind:value="ddlResidence.id">
-                                                {{ddlResidence.title}}
+                                                {{ ddlResidence.title }}
                                             </option>
                                             <span>{{ errors[0] }}</span>
                                         </select>
@@ -113,7 +113,7 @@
                                     <ValidationProvider name="Resident" rules="required" v-slot="{ errors }">
                                         <select v-model="formData.resident_id" class="form-control">
                                             <option v-for="ddlResident in ddlResidents" v-bind:value="ddlResident.id">
-                                                {{ddlResident.name}}
+                                                {{ ddlResident.name }}
                                             </option>
                                         </select>
                                         <span>{{ errors[0] }}</span>
@@ -122,7 +122,8 @@
 
                                 <v-col class="text-right" cols="12" sm="4">
                                     <div class="my-2">
-                                        <v-btn small color="primary" type="submit">{{(hideSaveBtn)?'save':'update'}}
+                                        <v-btn small color="primary" type="submit">
+                                            {{ (hideSaveBtn)?'save':'update' }}
                                         </v-btn>
                                     </div>
                                 </v-col>

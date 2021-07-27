@@ -2,8 +2,7 @@
     <v-app id="inspire">
         <v-navigation-drawer
                 v-model="drawer"
-                app
-        >
+                app>
             <v-list dense>
 
                 <router-link :to="{'name':'accommodations'}">
@@ -38,18 +37,18 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
+
             </v-list>
         </v-navigation-drawer>
 
         <v-app-bar
                 app
                 color="indigo"
-                dark
-        >
+                dark>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Accommodation</v-toolbar-title>
-            <select @change="logoutUser" style="margin-left: 548px">
-                <option disabled selected>{{ddl_label}}</option>
+            <select @change="logoutUser" class="logout-ddl">
+                <option disabled selected>{{ ddl_label }}</option>
                 <option>Logout</option>
             </select>
         </v-app-bar>
@@ -57,17 +56,14 @@
         <v-main>
             <v-container
                     class="fill-height"
-                    fluid
-            >
-
+                    fluid>
                 <router-view></router-view>
             </v-container>
         </v-main>
         <v-footer
                 color="indigo"
-                app
-        >
-            <span class="white--text">&copy; {{current_year}}</span>
+                app>
+            <span class="white--text">&copy; {{ current_year }}</span>
         </v-footer>
     </v-app>
 </template>
