@@ -12,6 +12,7 @@
 - **composer install**
 - **npm install** or **yarn**
 - **npm run dev** or **yarn dev**
+- **php artisan key:generate**
 - **php artisan migrate:refresh --seed**
 - **php artisan serve**
 
