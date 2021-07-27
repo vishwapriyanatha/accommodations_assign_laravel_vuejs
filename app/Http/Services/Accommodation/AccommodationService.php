@@ -56,6 +56,15 @@ class AccommodationService implements AccommodationServiceInterface
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        return $this->accommodation->destroy($id);
+    }
+
+    /**
      * @return mixed
      */
     public function getAccommodationData()

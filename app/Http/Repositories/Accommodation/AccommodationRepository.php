@@ -35,7 +35,6 @@ class AccommodationRepository implements AccommodationRepositoryInterface
     public function index()
     {
         return $this->residentResidence
-            ->where('status', 'active')
             ->with(['residences', 'resident'])
             ->get();
     }
@@ -82,6 +81,17 @@ class AccommodationRepository implements AccommodationRepositoryInterface
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        return $this->residentResidence
+            ->where('id', $id)
+            ->softDeletes();
+    }
+
+    /**
      * @return mixed
      */
     public function getAccommodationData()
@@ -89,14 +99,12 @@ class AccommodationRepository implements AccommodationRepositoryInterface
         $return['resident'] = $this->resident
             ->select('residents.name', 'residents.id')
             ->leftjoin('resident_residences', 'resident_residences.resident_id', 'residents.id')
-            ->whereNull('resident_residences.status')
-            ->orWhere('resident_residences.status', '!=', 'active')
+//            ->whereNull('resident_residences.status')
             ->get();
         $return['residence'] = $this->residence
             ->select('residences.title', 'residences.id')
             ->leftjoin('resident_residences', 'resident_residences.residences_id', 'residences.id')
-            ->whereNull('resident_residences.status')
-            ->orWhere('resident_residences.status', '!=', 'active')
+//            ->whereNull('resident_residences.status')
             ->get();
 
         return $return;

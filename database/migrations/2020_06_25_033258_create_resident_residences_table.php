@@ -15,9 +15,9 @@ class CreateResidentResidencesTable extends Migration
     {
         Schema::create('resident_residences', function (Blueprint $table) {
             $table->id();
-            $table->integer('residences_id');
-            $table->integer('resident_id');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->integer('residences_id')->nullable(false);
+            $table->integer('resident_id')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

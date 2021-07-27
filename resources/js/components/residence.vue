@@ -4,10 +4,10 @@
             <v-btn small color="primary" @click="openResidence">Add Residence</v-btn>
         </div>
         <v-data-table
-                :headers="headers"
-                :items="desserts"
-                :items-per-page="10"
-                class="elevation-1"
+            :headers="headers"
+            :items="desserts"
+            :items-per-page="10"
+            class="elevation-1"
         >
             <template v-slot:item.id="{ item }">
                 <div class="service-action" align="right">
@@ -73,13 +73,19 @@
                                         <span class="error-font">{{ errors[0] }}</span>
                                     </ValidationProvider>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Price*</label>
+                                    <ValidationProvider rules="required" name="Price" v-slot="{ errors }">
+                                        <input type="text" v-model="formData.price" class="form-control"/>
+                                        <span class="error-font">{{ errors[0] }}</span>
+                                    </ValidationProvider>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <v-col class="text-right" cols="12" sm="4">
                                     <div class="my-2">
                                         <v-btn small color="primary" type="submit">
-                                            {{ (hideSaveBtn)?'save':'update' }}
+                                            {{ (hideSaveBtn) ? 'save' : 'update' }}
                                         </v-btn>
                                     </div>
                                 </v-col>
@@ -105,6 +111,7 @@
                     id: 0,
                     title: '',
                     address: '',
+                    price: 0
                 }
 
             }

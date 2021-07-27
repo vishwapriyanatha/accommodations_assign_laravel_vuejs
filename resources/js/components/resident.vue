@@ -4,10 +4,10 @@
             <v-btn small color="primary" @click="openResident">Add Resident</v-btn>
         </div>
         <v-data-table
-                :headers="headers"
-                :items="desserts"
-                :items-per-page="10"
-                class="elevation-1"
+            :headers="headers"
+            :items="desserts"
+            :items-per-page="10"
+            class="elevation-1"
         >
             <template v-slot:item.id="{ item }">
                 <div class="service-action" align="right">
@@ -81,7 +81,34 @@
                                 <div class="form-group">
                                     <label>Date of Birth*</label>
                                     <ValidationProvider rules="required" name="Date of Birth" v-slot="{ errors }">
-                                        <input type="text" v-model="formData.date_of_birth" class="form-control"/>
+                                        <v-row>
+                                            <v-col cols="12">
+                                                <v-menu
+                                                    ref="menu"
+                                                    v-model="menu"
+                                                    :close-on-content-click="false"
+                                                    :return-value.sync="formData.date_of_birth"
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    min-width="290px">
+                                                    <template v-slot:activator="{ on, attrs }">
+                                                        <v-text-field
+                                                            v-model="formData.date_of_birth"
+                                                            v-bind="attrs"
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    <v-date-picker v-model="formData.date_of_birth" no-title scrollable>
+                                                        <v-spacer></v-spacer>
+                                                        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                                                        <v-btn text color="primary"
+                                                               @click="$refs.menu.save(formData.date_of_birth)">OK
+                                                        </v-btn>
+                                                    </v-date-picker>
+                                                </v-menu>
+                                            </v-col>
+                                            <v-spacer></v-spacer>
+                                        </v-row>
                                         <span class="error-font">{{ errors[0] }}</span>
                                     </ValidationProvider>
                                 </div>
@@ -105,7 +132,7 @@
                                 <v-col class="text-right" cols="12" sm="4">
                                     <div class="my-2">
                                         <v-btn small color="primary" type="submit">
-                                            {{ (hideSaveBtn)?'save':'update' }}
+                                            {{ (hideSaveBtn) ? 'save' : 'update' }}
                                         </v-btn>
                                     </div>
                                 </v-col>
@@ -126,6 +153,7 @@
         data() {
             return {
                 hideSaveBtn: true,
+                menu: false,
                 headers: [],
                 desserts: [],
                 titlesDdl: {},
@@ -133,7 +161,7 @@
                     id: 0,
                     title: '',
                     name: '',
-                    date_of_birth: '',
+                    date_of_birth: new Date().toISOString().substr(0, 10),
                     nic_number: '',
                     mobile_number: '',
                 }

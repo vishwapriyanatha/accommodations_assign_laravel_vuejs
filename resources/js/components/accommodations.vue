@@ -104,26 +104,27 @@
                                                     v-bind:value="ddlResidence.id">
                                                 {{ ddlResidence.title }}
                                             </option>
-                                            <span>{{ errors[0] }}</span>
                                         </select>
+                                        <span class="error-font">{{ errors[0] }}</span>
                                     </ValidationProvider>
                                 </div>
                                 <div class="form-group">
                                     <label>Resident*</label>
                                     <ValidationProvider name="Resident" rules="required" v-slot="{ errors }">
                                         <select v-model="formData.resident_id" class="form-control">
-                                            <option v-for="ddlResident in ddlResidents" v-bind:value="ddlResident.id">
+                                            <option v-for="ddlResident in ddlResidents"
+                                                    v-bind:value="ddlResident.id">
                                                 {{ ddlResident.name }}
                                             </option>
                                         </select>
-                                        <span>{{ errors[0] }}</span>
+                                        <span class="error-font">{{ errors[0] }}</span>
                                     </ValidationProvider>
                                 </div>
 
                                 <v-col class="text-right" cols="12" sm="4">
                                     <div class="my-2">
                                         <v-btn small color="primary" type="submit">
-                                            {{ (hideSaveBtn)?'save':'update' }}
+                                            {{ (hideSaveBtn) ? 'save' : 'update' }}
                                         </v-btn>
                                     </div>
                                 </v-col>
@@ -153,8 +154,7 @@
                 formData: {
                     id: 0,
                     residences_id: '',
-                    resident_id: '',
-                    status: 'active'
+                    resident_id: ''
                 }
 
             }
@@ -194,7 +194,6 @@
             },
             resetFrom() {
                 this.formData.id = 0;
-                this.formData.status = 'active';
                 this.formData.residences_id = this.formData.resident_id = '';
             },
             openModel() {
@@ -242,7 +241,7 @@
                     })
                         .then((willDelete) => {
                             if (willDelete) {
-                                axios.put('/accommodation/' + this.formData.id, {'status': 'inactive'}).then((res) => {
+                                axios.delete('/accommodation/' + this.formData.id).then((res) => {
                                     swal("recode update", "", "success");
                                 });
 

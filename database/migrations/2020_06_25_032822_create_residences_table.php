@@ -15,8 +15,9 @@ class CreateResidencesTable extends Migration
     {
         Schema::create('residences', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('address');
+            $table->string('title')->nullable(false);
+            $table->string('address')->nullable(false);
+            $table->string('price')->nullable(false);
             $table->timestamps();
         });
     }
