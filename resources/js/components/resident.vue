@@ -7,8 +7,7 @@
             :headers="headers"
             :items="desserts"
             :items-per-page="10"
-            class="elevation-1"
-        >
+            class="elevation-1">
             <template v-slot:item.id="{ item }">
                 <div class="service-action" align="right">
                     <a title="Edit" class="normal" href="#" @click.prevent="itemAction(item)">
@@ -95,14 +94,18 @@
                                                         <v-text-field
                                                             v-model="formData.date_of_birth"
                                                             v-bind="attrs"
-                                                            v-on="on"
-                                                        ></v-text-field>
+                                                            v-on="on">
+                                                        </v-text-field>
                                                     </template>
                                                     <v-date-picker v-model="formData.date_of_birth" no-title scrollable>
                                                         <v-spacer></v-spacer>
-                                                        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                                                        <v-btn text color="primary"
-                                                               @click="$refs.menu.save(formData.date_of_birth)">OK
+                                                        <v-btn text color="primary" @click="menu = false">
+                                                            Cancel
+                                                        </v-btn>
+                                                        <v-btn
+                                                            text color="primary"
+                                                            @click="$refs.menu.save(formData.date_of_birth)">
+                                                            OK
                                                         </v-btn>
                                                     </v-date-picker>
                                                 </v-menu>
@@ -214,12 +217,13 @@
             addResident() {
                 delete this.formData.id;
                 axios.post('/resident', this.formData);
-                $('#manage_resident').modal('hide')
+                $('#manage_resident').modal('hide');
+                this.getTableData();
             },
             getTitle() {
                 let self = this;
                 axios.get('/title').then((response) => {
-                    self.titlesDdl = response.data
+                    self.titlesDdl = response.data;
                 });
             },
             submitForm() {
@@ -243,7 +247,7 @@
             openResident() {
                 let self = this;
                 self.hideSaveBtn = true;
-                this.openModel()
+                this.openModel();
             },
             itemAction(itemAction) {
                 let self = this;
@@ -260,7 +264,8 @@
             },
             updateResident() {
                 axios.put('/resident/' + this.formData.id, this.formData);
-                $('#manage_resident').modal('hide')
+                $('#manage_resident').modal('hide');
+                this.getTableData();
             }
         },
         beforeMount() {

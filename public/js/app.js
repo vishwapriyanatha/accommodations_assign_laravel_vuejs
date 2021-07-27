@@ -2159,7 +2159,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "accommodations",
-  components: {},
   data: function data() {
     return {
       hideSaveBtn: true,
@@ -2218,6 +2217,7 @@ __webpack_require__.r(__webpack_exports__);
       delete this.formData.id;
       axios.post('/accommodation', this.formData);
       $('#manage_accommodations').modal('hide');
+      this.getTableData();
     },
     getData: function getData() {
       var self = this;
@@ -2267,6 +2267,7 @@ __webpack_require__.r(__webpack_exports__);
     updateAccommodation: function updateAccommodation() {
       axios.put('/accommodation/' + this.formData.id, this.formData);
       $('#manage_accommodations').modal('hide');
+      this.getTableData();
     }
   },
   beforeMount: function beforeMount() {
@@ -2285,7 +2286,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -2444,6 +2444,7 @@ __webpack_require__.r(__webpack_exports__);
       delete this.formData.id;
       axios.post('/residence', this.formData);
       $('#manage_residence').modal('hide');
+      this.getTableData();
     },
     openResidence: function openResidence() {
       this.hideSaveBtn = true;
@@ -2464,6 +2465,7 @@ __webpack_require__.r(__webpack_exports__);
     updateResidence: function updateResidence() {
       axios.put('/residence/' + this.formData.id, this.formData);
       $('#manage_residence').modal('hide');
+      this.getTableData();
     }
   },
   beforeMount: function beforeMount() {
@@ -2482,6 +2484,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -2689,6 +2694,7 @@ __webpack_require__.r(__webpack_exports__);
       delete this.formData.id;
       axios.post('/resident', this.formData);
       $('#manage_resident').modal('hide');
+      this.getTableData();
     },
     getTitle: function getTitle() {
       var self = this;
@@ -2735,6 +2741,7 @@ __webpack_require__.r(__webpack_exports__);
     updateResident: function updateResident() {
       axios.put('/resident/' + this.formData.id, this.formData);
       $('#manage_resident').modal('hide');
+      this.getTableData();
     }
   },
   beforeMount: function beforeMount() {
@@ -40884,7 +40891,7 @@ var render = function() {
                                                                     },
                                                                     [
                                                                       _vm._v(
-                                                                        "Cancel"
+                                                                        "\n                                                            Cancel\n                                                        "
                                                                       )
                                                                     ]
                                                                   ),
@@ -40912,7 +40919,7 @@ var render = function() {
                                                                     },
                                                                     [
                                                                       _vm._v(
-                                                                        "OK\n                                                        "
+                                                                        "\n                                                            OK\n                                                        "
                                                                       )
                                                                     ]
                                                                   )

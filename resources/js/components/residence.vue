@@ -7,8 +7,7 @@
             :headers="headers"
             :items="desserts"
             :items-per-page="10"
-            class="elevation-1"
-        >
+            class="elevation-1">
             <template v-slot:item.id="{ item }">
                 <div class="service-action" align="right">
                     <a title="Edit" class="normal" href="#" @click.prevent="itemAction(item)">
@@ -156,12 +155,13 @@
             openModel() {
                 this.$refs.observer.reset();
                 this.resetFrom();
-                $('#manage_residence').modal('show')
+                $('#manage_residence').modal('show');
             },
             addResidence() {
                 delete this.formData.id;
                 axios.post('/residence', this.formData);
-                $('#manage_residence').modal('hide')
+                $('#manage_residence').modal('hide');
+                this.getTableData();
             },
             openResidence() {
                 this.hideSaveBtn = true;
@@ -182,6 +182,7 @@
             updateResidence() {
                 axios.put('/residence/' + this.formData.id, this.formData);
                 $('#manage_residence').modal('hide')
+                this.getTableData();
             }
         },
         beforeMount() {
