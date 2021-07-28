@@ -60,6 +60,7 @@ class AccommodationRepository implements AccommodationRepositoryInterface
     public function show($id)
     {
         return $this->residentResidence
+            ->with(['residences', 'resident'])
             ->where('id', $id)
             ->first();
     }
@@ -88,7 +89,7 @@ class AccommodationRepository implements AccommodationRepositoryInterface
     {
         return $this->residentResidence
             ->where('id', $id)
-            ->softDeletes();
+            ->delete();
     }
 
     /**
@@ -99,12 +100,10 @@ class AccommodationRepository implements AccommodationRepositoryInterface
         $return['resident'] = $this->resident
             ->select('residents.name', 'residents.id')
             ->leftjoin('resident_residences', 'resident_residences.resident_id', 'residents.id')
-//            ->whereNull('resident_residences.status')
             ->get();
         $return['residence'] = $this->residence
             ->select('residences.title', 'residences.id')
             ->leftjoin('resident_residences', 'resident_residences.residences_id', 'residences.id')
-//            ->whereNull('resident_residences.status')
             ->get();
 
         return $return;

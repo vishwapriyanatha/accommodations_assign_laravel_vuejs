@@ -2156,6 +2156,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "accommodations",
@@ -2164,8 +2165,8 @@ __webpack_require__.r(__webpack_exports__);
       hideSaveBtn: true,
       headers: [],
       desserts: [],
-      ddlResidences: {},
-      ddlResidents: {},
+      ddlResidences: [],
+      ddlResidents: [],
       formData: {
         id: 0,
         residences_id: '',
@@ -2241,8 +2242,17 @@ __webpack_require__.r(__webpack_exports__);
         self.hideSaveBtn = false;
         self.openModel();
         axios.get('/accommodation/' + _itemAction.id).then(function (response) {
-          delete response.data.created_at;
-          delete response.data.updated_at;
+          var responseData = response.data;
+          delete responseData.created_at;
+          delete responseData.updated_at;
+          self.ddlResidences.push({
+            'id': responseData.residences.id,
+            'title': responseData.residences.title
+          });
+          self.ddlResidents.push({
+            'id': responseData.resident.id,
+            'name': responseData.resident.name
+          });
           Object.keys(response.data).forEach(function (key) {
             self.formData[key] = response.data[key];
           });
@@ -2263,6 +2273,8 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
+
+      this.getTableData();
     },
     updateAccommodation: function updateAccommodation() {
       axios.put('/accommodation/' + this.formData.id, this.formData);

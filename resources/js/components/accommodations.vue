@@ -4,10 +4,10 @@
             <v-btn small color="primary" @click="openAccommodation">Add Accommodation</v-btn>
         </div>
         <v-data-table
-                :headers="headers"
-                :items="desserts"
-                :items-per-page="10"
-                class="elevation-1">
+            :headers="headers"
+            :items="desserts"
+            :items-per-page="10"
+            class="elevation-1">
             <template v-slot:item.id="{ item }">
                 <div class="service-action" align="right">
 
@@ -112,6 +112,7 @@
                                     <label>Resident*</label>
                                     <ValidationProvider name="Resident" rules="required" v-slot="{ errors }">
                                         <select v-model="formData.resident_id" class="form-control">
+
                                             <option v-for="ddlResident in ddlResidents"
                                                     v-bind:value="ddlResident.id">
                                                 {{ ddlResident.name }}
@@ -147,8 +148,8 @@
                 hideSaveBtn: true,
                 headers: [],
                 desserts: [],
-                ddlResidences: {},
-                ddlResidents: {},
+                ddlResidences: [],
+                ddlResidents: [],
                 formData: {
                     id: 0,
                     residences_id: '',
@@ -225,8 +226,17 @@
                     self.hideSaveBtn = false;
                     self.openModel();
                     axios.get('/accommodation/' + itemAction.id).then((response) => {
-                        delete response.data.created_at;
-                        delete response.data.updated_at;
+                        let responseData = response.data;
+                        delete responseData.created_at;
+                        delete responseData.updated_at;
+                        self.ddlResidences.push({
+                            'id': responseData.residences.id,
+                            'title': responseData.residences.title
+                        });
+                        self.ddlResidents.push({
+                            'id': responseData.resident.id,
+                            'name': responseData.resident.name
+                        });
                         Object.keys(response.data).forEach(function (key) {
                             self.formData[key] = response.data[key];
                         });
@@ -249,7 +259,7 @@
                             }
                         });
                 }
-
+                this.getTableData();
             },
             updateAccommodation() {
                 axios.put('/accommodation/' + this.formData.id, this.formData);

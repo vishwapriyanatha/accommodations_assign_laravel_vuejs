@@ -9,7 +9,8 @@ class ResidentResidence extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['residences_id', 'resident_id', 'status'];
+    protected $fillable = ['residences_id', 'resident_id'];
+    protected $dates = ['deleted_at'];
 
     public function residences()
     {
