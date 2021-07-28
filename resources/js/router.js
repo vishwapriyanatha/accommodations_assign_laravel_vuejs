@@ -4,6 +4,8 @@ import MainLayout from './components/ExampleComponent';
 import accommodations from './components/accommodations'
 import resident from './components/resident'
 import residence from './components/residence'
+import invoice from './components/invoice'
+import viewInvoice from './components/viewInvoice'
 
 Vue.use(Router);
 const router = new Router({
@@ -29,6 +31,17 @@ const router = new Router({
                     name: 'residence',
                     path: '/residence',
                     component: residence
+                },
+                {
+                    name: 'invoice',
+                    path: '/invoice',
+                    component: invoice
+                },
+                {
+                    name: 'view_invoice',
+                    path: '/invoice/:id',
+                    component: viewInvoice,
+                    props: true
                 },
             ]
         }]

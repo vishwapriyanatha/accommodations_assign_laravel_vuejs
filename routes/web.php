@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/accommodation', 'AccommodationController');
     Route::get('/accommodation_data', 'AccommodationController@getAccommodationData')->name('get.accommodation.data');
 
+    //Invoice
+    Route::resource('/invoice', 'InvoiceController');
+
 });
 
 

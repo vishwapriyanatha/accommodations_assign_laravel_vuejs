@@ -1978,6 +1978,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
@@ -2280,6 +2291,262 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/accommodation/' + this.formData.id, this.formData);
       $('#manage_accommodations').modal('hide');
       this.getTableData();
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.getTableData();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/invoice.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/invoice.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "invoice",
+  data: function data() {
+    return {
+      headers: [],
+      desserts: []
+    };
+  },
+  methods: {
+    getTableData: function getTableData() {
+      var self = this;
+      self.headers = [{
+        text: 'Resident',
+        align: 'start',
+        sortable: true,
+        value: 'resident.name'
+      }, {
+        text: 'Residence',
+        align: 'start',
+        sortable: true,
+        value: 'residences.title'
+      }, {
+        text: 'Action',
+        value: 'id'
+      }];
+      axios.get('/invoice').then(function (response) {
+        self.desserts = response.data;
+      });
+    },
+    itemAction: function itemAction(_itemAction) {
+      this.$router.push({
+        name: 'view_invoice',
+        params: {
+          id: _itemAction.id
+        }
+      });
     }
   },
   beforeMount: function beforeMount() {
@@ -2758,6 +3025,85 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {
     this.getTableData();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/viewInvoice.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/viewInvoice.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "viewInvoice",
+  data: function data() {
+    return {
+      tableData: {}
+    };
+  },
+  methods: {
+    getInvoice: function getInvoice() {
+      var _this = this;
+
+      axios.get('/invoice/' + this.$route.params.id).then(function (response) {
+        _this.tableData = response.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getInvoice();
   }
 });
 
@@ -39164,6 +39510,32 @@ var render = function() {
                   )
                 ],
                 1
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { attrs: { to: { name: "invoice" } } },
+                [
+                  _c(
+                    "v-list-item",
+                    { attrs: { link: "" } },
+                    [
+                      _c(
+                        "v-list-item-action",
+                        [_c("v-icon", [_vm._v("mdi-domain")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-content",
+                        [_c("v-list-item-title", [_vm._v("Invoice")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1
@@ -39824,6 +40196,115 @@ var render = function() {
           )
         ]
       )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/invoice.vue?vue&type=template&id=40b26632&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/invoice.vue?vue&type=template&id=40b26632&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-app",
+    [
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.desserts,
+          "items-per-page": 10
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "item.id",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "div",
+                  { staticClass: "service-action", attrs: { align: "right" } },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "normal",
+                        attrs: { title: "View", href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.itemAction(item)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              version: "1.0",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "20",
+                              height: "20",
+                              viewBox: "0 0 840.000000 859.000000",
+                              preserveAspectRatio: "xMidYMid meet"
+                            }
+                          },
+                          [
+                            _c(
+                              "g",
+                              {
+                                attrs: {
+                                  transform:
+                                    "translate(0.000000,859.000000) scale(0.100000,-0.100000)",
+                                  fill: "#000000",
+                                  stroke: "none"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M4030 6498 c-107 -3 -231 -11 -275 -17 -44 -7 -109 -16 -145 -20 -72\n-10 -77 -11 -235 -47 -131 -30 -182 -43 -213 -55 -13 -5 -34 -9 -47 -9 -14 0\n-25 -4 -25 -10 0 -5 -13 -10 -29 -10 -17 0 -33 -4 -36 -10 -3 -5 -19 -10 -36\n-10 -16 0 -29 -4 -29 -10 0 -5 -13 -10 -30 -10 -16 0 -30 -4 -30 -10 0 -5 -13\n-10 -30 -10 -16 0 -30 -4 -30 -10 0 -5 -13 -10 -30 -10 -16 0 -30 -4 -30 -10\n0 -5 -9 -10 -20 -10 -11 0 -28 -4 -38 -9 -9 -5 -28 -13 -42 -18 -14 -6 -51\n-22 -83 -36 -31 -15 -64 -27 -72 -27 -8 0 -15 -4 -15 -10 0 -5 -9 -10 -19 -10\n-11 0 -23 -4 -26 -10 -3 -5 -15 -10 -26 -10 -10 0 -19 -4 -19 -10 0 -5 -9 -10\n-19 -10 -11 0 -23 -4 -26 -10 -3 -5 -17 -10 -31 -10 -13 0 -24 -4 -24 -10 0\n-5 -9 -10 -20 -10 -11 0 -20 -4 -20 -10 0 -5 -9 -10 -20 -10 -11 0 -20 -4 -20\n-10 0 -5 -9 -10 -19 -10 -11 0 -21 -4 -23 -8 -1 -4 -30 -21 -63 -37 -33 -15\n-62 -31 -65 -35 -3 -4 -34 -22 -70 -41 -36 -19 -66 -37 -68 -41 -2 -5 -10 -8\n-18 -8 -8 0 -14 -4 -14 -10 0 -5 -9 -10 -20 -10 -11 0 -20 -4 -20 -10 0 -5 -8\n-10 -18 -10 -10 0 -24 -9 -32 -20 -8 -11 -22 -20 -32 -20 -10 0 -18 -4 -18\n-10 0 -5 -9 -10 -19 -10 -11 0 -21 -4 -23 -8 -1 -5 -30 -26 -63 -47 -33 -22\n-61 -43 -63 -47 -2 -5 -11 -8 -21 -8 -9 0 -23 -9 -31 -20 -8 -11 -21 -20 -30\n-20 -9 0 -22 -9 -30 -20 -8 -11 -20 -20 -27 -20 -7 0 -13 -4 -13 -10 0 -5 -7\n-10 -15 -10 -8 0 -15 -4 -15 -10 0 -5 -7 -10 -15 -10 -8 0 -15 -4 -15 -10 0\n-5 -6 -10 -12 -10 -7 0 -26 -11 -43 -25 -47 -39 -48 -40 -84 -65 -44 -31 -70\n-51 -86 -67 -8 -7 -18 -13 -24 -13 -6 0 -11 -4 -11 -10 0 -5 -5 -10 -10 -10\n-6 0 -26 -16 -46 -35 -19 -19 -38 -35 -42 -35 -4 0 -22 -14 -41 -30 -18 -16\n-49 -42 -69 -57 -19 -15 -55 -47 -78 -70 -24 -24 -48 -43 -53 -43 -6 0 -54\n-42 -106 -92 -53 -51 -101 -95 -107 -97 -15 -5 -337 -329 -369 -371 -15 -19\n-54 -63 -88 -98 -34 -34 -61 -67 -61 -72 0 -6 34 -45 75 -87 41 -43 75 -81 75\n-86 0 -9 358 -367 367 -367 6 0 47 -38 159 -147 24 -24 48 -43 55 -43 6 0 27\n-17 47 -38 20 -20 59 -55 87 -77 27 -22 63 -52 79 -67 16 -16 33 -28 38 -28 6\n0 23 -13 38 -30 15 -16 33 -30 39 -30 6 0 11 -4 11 -10 0 -5 5 -10 11 -10 6 0\n16 -6 23 -12 7 -7 25 -22 40 -33 15 -11 36 -27 46 -35 10 -8 28 -22 40 -30 13\n-8 33 -25 46 -37 13 -13 30 -23 39 -23 8 0 15 -4 15 -10 0 -5 7 -10 15 -10 8\n0 15 -4 15 -10 0 -5 7 -10 15 -10 8 0 15 -4 15 -10 0 -5 7 -10 15 -10 8 0 15\n-4 15 -8 0 -5 12 -15 28 -23 15 -8 34 -21 42 -30 8 -9 31 -24 50 -34 19 -10\n37 -21 40 -25 3 -3 24 -17 47 -30 24 -13 43 -27 43 -32 0 -4 9 -8 20 -8 11 0\n20 -4 20 -10 0 -5 8 -10 18 -10 10 0 24 -9 32 -20 8 -11 22 -20 32 -20 10 0\n18 -3 18 -8 0 -4 15 -13 33 -21 17 -8 34 -17 37 -20 3 -4 30 -19 60 -35 30\n-16 57 -32 60 -36 3 -4 46 -27 95 -51 50 -23 92 -47 93 -51 2 -4 12 -8 23 -8\n10 0 19 -4 19 -10 0 -5 9 -10 20 -10 11 0 20 -4 20 -10 0 -5 9 -10 19 -10 11\n0 36 -8 58 -19 70 -34 128 -60 151 -66 12 -4 22 -11 22 -16 0 -5 9 -9 19 -9\n11 0 23 -4 26 -10 3 -5 17 -10 31 -10 13 0 24 -4 24 -10 0 -5 11 -10 25 -10\n14 0 25 -4 25 -10 0 -5 14 -10 30 -10 17 0 30 -4 30 -10 0 -5 14 -10 30 -10\n17 0 30 -4 30 -10 0 -5 14 -10 30 -10 17 0 30 -4 30 -10 0 -5 9 -10 20 -10 11\n0 28 -4 38 -9 9 -5 49 -18 87 -29 39 -12 97 -29 130 -38 33 -10 87 -24 120\n-31 33 -8 78 -18 100 -24 73 -17 149 -31 205 -35 30 -3 64 -9 75 -14 28 -13\n116 -19 348 -26 108 -3 197 -10 197 -15 0 -5 18 -9 40 -9 22 0 40 5 40 10 0 6\n52 10 135 10 74 0 135 4 135 9 0 5 41 10 91 10 50 1 99 6 109 11 10 6 39 10\n64 10 25 0 48 5 51 10 3 6 19 10 35 10 17 0 49 4 72 10 87 19 224 53 273 67\n28 8 68 19 90 25 22 5 48 14 57 19 10 5 27 9 38 9 11 0 20 5 20 10 0 6 14 10\n30 10 17 0 30 5 30 10 0 6 14 10 30 10 17 0 30 5 30 10 0 6 14 10 30 10 17 0\n30 5 30 10 0 6 14 10 30 10 17 0 30 5 30 10 0 6 11 10 25 10 14 0 25 4 25 8 0\n5 23 15 50 22 28 7 50 17 50 22 0 4 7 8 15 8 8 0 67 25 130 55 62 30 121 55\n129 55 9 0 16 5 16 10 0 6 9 10 20 10 11 0 20 4 20 8 0 5 16 14 35 22 19 8 35\n17 35 22 0 4 9 8 20 8 11 0 20 5 20 10 0 6 9 10 20 10 11 0 20 5 20 10 0 6 9\n10 19 10 11 0 21 4 23 8 3 8 102 65 165 96 13 6 23 14 23 19 0 4 9 7 20 7 11\n0 20 5 20 10 0 6 7 10 15 10 8 0 15 5 15 10 0 6 7 10 15 10 8 0 15 5 15 10 0\n6 9 10 20 10 11 0 20 5 20 10 0 6 7 10 15 10 8 0 15 5 15 10 0 6 5 10 11 10 6\n0 32 15 57 33 45 31 55 38 86 65 8 6 20 12 25 12 10 0 36 19 66 48 8 6 20 12\n27 12 8 0 20 9 28 20 8 11 20 20 28 20 7 0 24 11 37 24 14 14 46 40 72 58 46\n31 55 38 111 85 15 13 31 23 35 23 5 0 22 14 37 30 15 17 32 30 38 30 5 0 22\n12 38 28 16 15 52 45 79 67 27 22 67 57 87 77 20 21 41 38 47 38 6 0 37 26 70\n57 33 32 78 74 101 93 62 54 420 409 420 418 0 4 31 40 70 80 39 40 70 77 70\n82 0 5 -27 38 -61 72 -34 35 -73 79 -88 98 -31 41 -352 364 -374 376 -9 5 -57\n48 -107 97 -50 48 -95 87 -101 87 -6 0 -27 17 -47 38 -20 20 -53 49 -72 64\n-19 14 -53 42 -75 62 -22 20 -43 36 -47 36 -4 0 -23 16 -42 35 -20 19 -40 35\n-46 35 -6 0 -21 10 -34 23 -32 30 -54 48 -106 84 -25 17 -58 43 -75 57 -16 14\n-35 26 -40 26 -6 0 -17 9 -25 20 -8 11 -22 20 -32 20 -10 0 -18 5 -18 10 0 6\n-6 10 -13 10 -7 0 -19 9 -27 20 -8 11 -22 20 -32 20 -10 0 -18 4 -18 9 0 5 -8\n12 -19 16 -10 3 -31 17 -47 31 -16 14 -50 37 -76 51 -27 14 -48 30 -48 35 0 4\n-9 8 -20 8 -11 0 -20 5 -20 10 0 6 -6 10 -13 10 -7 0 -23 9 -35 20 -12 11 -28\n20 -37 20 -8 0 -15 3 -15 8 0 4 -10 12 -23 18 -80 39 -203 108 -205 115 -2 5\n-12 9 -23 9 -10 0 -19 5 -19 10 0 6 -9 10 -20 10 -11 0 -20 5 -20 10 0 6 -7\n10 -15 10 -8 0 -15 5 -15 10 0 6 -9 10 -20 10 -11 0 -20 5 -20 10 0 6 -9 10\n-20 10 -11 0 -20 5 -20 10 0 6 -13 10 -30 10 -16 0 -30 5 -30 10 0 6 -9 10\n-20 10 -11 0 -20 3 -20 8 0 8 -49 32 -67 32 -7 0 -13 5 -13 10 0 6 -9 10 -19\n10 -11 0 -23 5 -26 10 -3 6 -13 10 -20 10 -8 0 -47 16 -86 35 -40 19 -81 35\n-91 35 -10 0 -18 5 -18 10 0 6 -13 10 -30 10 -16 0 -30 5 -30 10 0 6 -13 10\n-30 10 -16 0 -30 5 -30 10 0 6 -13 10 -30 10 -16 0 -30 5 -30 10 0 6 -13 10\n-30 10 -16 0 -30 5 -30 10 0 6 -11 10 -24 10 -14 0 -28 5 -31 10 -3 6 -22 10\n-41 10 -19 0 -34 4 -34 9 0 5 -15 11 -32 14 -35 6 -88 19 -153 37 -83 23 -238\n55 -340 69 -27 4 -55 10 -61 14 -7 4 -49 7 -95 8 -46 1 -86 5 -89 9 -7 11\n-318 16 -540 8z m485 -267 c189 -16 330 -40 550 -93 22 -5 55 -12 73 -15 17\n-3 32 -9 32 -14 0 -5 18 -9 40 -9 22 0 40 -4 40 -10 0 -5 16 -10 35 -10 19 0\n35 -4 35 -10 0 -5 14 -10 30 -10 17 0 30 -4 30 -10 0 -5 14 -10 30 -10 17 0\n30 -4 30 -10 0 -5 14 -10 30 -10 17 0 30 -4 30 -10 0 -5 8 -10 17 -10 18 0 85\n-22 93 -30 3 -3 23 -11 45 -19 22 -8 63 -24 90 -36 28 -13 71 -32 97 -44 26\n-11 55 -21 63 -21 8 0 15 -4 15 -10 0 -5 9 -10 20 -10 11 0 20 -4 20 -10 0 -5\n9 -10 20 -10 11 0 20 -4 20 -10 0 -5 11 -10 25 -10 14 0 25 -4 25 -10 0 -5 9\n-10 20 -10 11 0 20 -4 20 -10 0 -5 9 -10 20 -10 11 0 20 -4 20 -10 0 -5 4 -10\n9 -10 13 0 175 -92 179 -102 2 -4 12 -8 23 -8 10 0 19 -4 19 -8 0 -5 16 -14\n35 -22 19 -8 35 -17 35 -22 0 -4 7 -8 15 -8 8 0 15 -4 15 -10 0 -5 9 -10 20\n-10 11 0 20 -4 20 -10 0 -5 7 -10 15 -10 8 0 15 -4 15 -10 0 -5 6 -10 13 -10\n7 0 22 -9 34 -19 11 -10 35 -27 54 -36 41 -22 93 -57 97 -67 2 -5 10 -8 18 -8\n8 0 14 -4 14 -10 0 -5 7 -10 15 -10 8 0 15 -4 15 -10 0 -5 5 -10 11 -10 7 0\n20 -10 30 -22 11 -11 19 -16 19 -9 0 6 14 -2 31 -19 18 -16 38 -30 45 -30 8 0\n14 -4 14 -8 0 -4 12 -15 28 -24 15 -10 43 -31 62 -47 19 -17 39 -31 43 -31 5\n0 22 -13 37 -30 15 -16 33 -30 40 -30 7 0 25 -13 40 -30 15 -16 33 -30 38 -30\n6 0 12 -3 14 -7 2 -5 23 -24 48 -43 66 -51 67 -51 119 -100 64 -59 90 -80 99\n-80 4 0 14 -9 22 -20 8 -11 18 -20 22 -20 5 0 44 -35 87 -77 121 -119 203\n-193 213 -193 4 0 8 -5 8 -10 0 -6 36 -46 80 -90 44 -44 80 -84 80 -90 0 -6\n-28 -39 -62 -74 -35 -35 -70 -72 -79 -82 -9 -10 -56 -55 -104 -99 -48 -44\n-116 -108 -151 -142 -35 -35 -67 -63 -72 -63 -4 0 -14 -9 -22 -20 -8 -11 -18\n-20 -22 -20 -8 0 -37 -24 -109 -90 -21 -19 -54 -48 -74 -65 -21 -16 -43 -36\n-50 -42 -8 -7 -18 -13 -24 -13 -6 0 -11 -4 -11 -10 0 -5 -5 -10 -11 -10 -6 0\n-24 -13 -39 -30 -15 -16 -33 -30 -39 -30 -7 0 -27 -15 -45 -32 -19 -18 -63\n-53 -100 -78 -36 -25 -65 -48 -66 -52 0 -5 -7 -8 -15 -8 -8 0 -15 -4 -15 -10\n0 -5 -5 -10 -11 -10 -7 0 -20 -10 -30 -22 -11 -11 -19 -16 -19 -9 0 6 -14 -2\n-31 -19 -18 -16 -38 -30 -45 -30 -8 0 -14 -4 -14 -8 0 -5 -16 -17 -35 -28 -19\n-10 -35 -21 -35 -25 0 -4 -13 -12 -30 -19 -16 -7 -30 -16 -30 -21 0 -5 -8 -9\n-18 -9 -10 0 -24 -9 -32 -20 -8 -11 -22 -20 -32 -20 -10 0 -18 -4 -18 -10 0\n-5 -9 -10 -20 -10 -11 0 -20 -4 -20 -10 0 -5 -7 -10 -15 -10 -8 0 -15 -4 -15\n-10 0 -5 -7 -10 -15 -10 -8 0 -15 -3 -15 -8 0 -4 -15 -13 -32 -21 -18 -8 -35\n-17 -38 -21 -3 -3 -45 -28 -95 -54 -49 -27 -91 -52 -93 -57 -2 -5 -12 -9 -23\n-9 -10 0 -19 -4 -19 -10 0 -5 -9 -10 -20 -10 -11 0 -20 -4 -20 -10 0 -5 -9\n-10 -20 -10 -11 0 -20 -4 -20 -10 0 -5 -11 -10 -25 -10 -14 0 -25 -4 -25 -10\n0 -5 -9 -10 -20 -10 -11 0 -20 -4 -20 -10 0 -5 -9 -10 -20 -10 -11 0 -20 -4\n-20 -10 0 -5 -7 -10 -15 -10 -8 0 -34 -9 -57 -19 -103 -47 -156 -69 -193 -82\n-22 -8 -42 -16 -45 -19 -8 -8 -75 -30 -93 -30 -9 0 -17 -4 -17 -10 0 -5 -13\n-10 -30 -10 -16 0 -30 -4 -30 -10 0 -5 -13 -10 -30 -10 -16 0 -30 -4 -30 -10\n0 -5 -13 -10 -30 -10 -16 0 -30 -4 -30 -9 0 -5 -15 -11 -32 -14 -55 -9 -92\n-18 -113 -27 -11 -5 -33 -11 -50 -15 -16 -3 -46 -10 -65 -15 -152 -37 -230\n-52 -360 -71 -193 -27 -630 -49 -630 -31 0 6 -49 10 -121 11 -66 1 -129 6\n-139 11 -10 6 -40 10 -66 10 -26 0 -63 4 -83 9 -20 5 -65 14 -101 20 -79 14\n-147 29 -220 48 -30 8 -73 19 -95 25 -22 5 -48 14 -57 19 -10 5 -29 9 -42 9\n-14 0 -28 5 -31 10 -3 5 -19 10 -36 10 -16 0 -29 5 -29 10 0 6 -13 10 -30 10\n-16 0 -30 5 -30 10 0 6 -13 10 -30 10 -16 0 -30 5 -30 10 0 6 -13 10 -30 10\n-16 0 -30 5 -30 10 0 6 -11 10 -25 10 -14 0 -25 5 -25 10 0 6 -9 10 -20 10\n-11 0 -28 4 -38 9 -9 5 -33 16 -52 24 -46 20 -165 74 -214 98 -22 10 -46 19\n-53 19 -7 0 -13 5 -13 10 0 6 -9 10 -20 10 -11 0 -20 5 -20 10 0 6 -11 10 -25\n10 -14 0 -25 5 -25 10 0 6 -9 10 -19 10 -11 0 -21 4 -23 9 -1 4 -52 34 -113\n66 -60 32 -111 62 -113 67 -2 4 -11 8 -21 8 -9 0 -23 9 -31 20 -8 11 -22 20\n-32 20 -10 0 -18 5 -18 10 0 6 -9 10 -20 10 -11 0 -20 5 -20 10 0 6 -7 10 -15\n10 -8 0 -15 5 -15 10 0 6 -8 10 -18 10 -10 0 -24 9 -32 20 -8 11 -22 20 -32\n20 -10 0 -18 4 -18 8 0 4 -29 25 -65 47 -36 22 -65 43 -65 48 0 4 -6 7 -14 7\n-7 0 -27 13 -44 30 -18 16 -38 30 -45 30 -7 0 -19 9 -27 20 -8 11 -21 20 -30\n20 -9 0 -22 9 -30 20 -8 11 -20 20 -27 20 -7 0 -13 5 -13 10 0 6 -5 10 -11 10\n-10 0 -62 39 -121 93 -16 15 -34 27 -39 27 -4 0 -19 11 -33 25 -14 14 -30 25\n-36 25 -5 0 -10 5 -10 10 0 6 -5 10 -10 10 -6 0 -21 10 -34 23 -13 12 -40 36\n-60 52 -21 17 -54 46 -75 65 -52 47 -80 70 -87 70 -3 0 -15 10 -28 23 -13 12\n-63 58 -111 102 -48 44 -120 113 -162 153 -41 39 -79 72 -84 72 -5 0 -9 5 -9\n11 0 5 -27 37 -60 69 -33 32 -60 64 -60 70 0 9 276 290 285 290 2 0 35 30 73\n68 99 96 151 142 162 142 6 0 10 5 10 10 0 6 5 10 10 10 6 0 30 19 54 43 24\n23 58 53 76 66 18 14 46 37 62 53 17 15 34 28 39 28 5 0 9 5 9 10 0 6 6 10 13\n10 7 0 19 9 27 20 8 11 20 20 26 20 6 0 24 12 40 28 16 15 61 49 99 77 39 27\n79 57 89 67 11 10 25 18 31 18 6 0 17 9 25 20 8 11 21 20 30 20 9 0 22 9 30\n20 8 11 20 20 27 20 7 0 13 5 13 10 0 6 7 10 15 10 8 0 15 5 15 10 0 6 7 10\n15 10 8 0 15 4 15 9 0 5 8 12 19 16 10 3 29 14 42 25 46 37 94 68 122 77 9 3\n17 8 17 12 0 4 16 13 35 21 19 8 35 17 35 22 0 4 8 8 18 8 10 0 24 9 32 20 8\n11 22 20 32 20 10 0 18 5 18 10 0 6 9 10 19 10 11 0 21 4 23 8 2 5 53 35 113\n67 61 32 114 62 119 66 6 5 18 9 28 9 10 0 18 5 18 10 0 6 9 10 20 10 11 0 20\n5 20 10 0 6 11 10 25 10 14 0 25 3 25 8 0 10 50 32 72 32 10 0 18 5 18 10 0 6\n9 10 20 10 11 0 20 5 20 10 0 6 7 10 14 10 8 0 35 11 59 24 24 12 65 29 91 37\n25 7 46 17 46 21 0 4 11 8 24 8 14 0 28 5 31 10 3 6 17 10 31 10 13 0 24 5 24\n10 0 6 14 10 30 10 17 0 30 5 30 10 0 6 14 10 30 10 17 0 30 5 30 10 0 6 13\n10 29 10 17 0 33 5 36 10 3 6 22 10 41 10 19 0 34 5 34 10 0 6 13 10 29 10 17\n0 33 5 36 10 3 6 17 10 30 10 13 0 34 4 47 9 20 8 149 36 331 71 27 6 66 10\n88 10 22 0 48 4 58 10 10 5 68 10 129 11 61 1 116 6 124 11 15 10 285 3 453\n-11z"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M4090 4970 c-14 -5 -45 -14 -70 -20 -55 -15 -160 -61 -160 -71 0 -4\n-9 -11 -20 -14 -11 -4 -32 -17 -45 -31 -13 -13 -29 -24 -35 -24 -5 0 -10 -4\n-10 -10 0 -5 -6 -10 -14 -10 -8 0 -18 -9 -21 -20 -3 -11 -9 -20 -13 -20 -4 0\n-18 -18 -32 -40 -14 -22 -28 -40 -32 -40 -5 0 -8 -7 -8 -15 0 -8 -4 -15 -10\n-15 -5 0 -10 -9 -10 -20 0 -11 -4 -20 -10 -20 -5 0 -10 -9 -10 -20 0 -11 -4\n-20 -10 -20 -5 0 -10 -13 -10 -30 0 -16 -4 -30 -10 -30 -5 0 -10 -18 -10 -39\n0 -22 -4 -43 -10 -46 -6 -4 -10 -58 -10 -131 0 -76 4 -124 10 -124 6 0 10 -18\n10 -40 0 -22 5 -40 10 -40 6 0 10 -13 10 -30 0 -16 5 -30 10 -30 6 0 10 -9 10\n-20 0 -11 5 -20 10 -20 6 0 10 -9 10 -20 0 -11 5 -20 10 -20 6 0 10 -7 10 -15\n0 -8 4 -15 8 -15 5 0 15 -12 23 -27 8 -16 24 -38 37 -51 12 -13 22 -27 22 -32\n0 -6 7 -10 15 -10 8 0 15 -4 15 -10 0 -5 5 -10 10 -10 6 0 22 -11 36 -25 14\n-14 29 -25 34 -25 5 0 15 -6 22 -13 24 -24 110 -67 134 -67 12 0 25 -4 28 -9\n20 -32 382 -32 402 0 3 5 14 9 25 9 20 0 120 46 129 60 3 4 15 13 28 19 48 26\n150 123 171 164 8 15 18 27 23 27 4 0 8 7 8 15 0 8 5 15 10 15 6 0 10 9 10 20\n0 11 5 20 10 20 6 0 10 9 10 20 0 11 5 20 10 20 6 0 10 14 10 30 0 17 5 30 10\n30 6 0 10 18 10 39 0 22 5 43 10 46 6 4 10 57 10 125 0 68 -4 121 -10 125 -5\n3 -10 24 -10 46 0 21 -4 39 -10 39 -5 0 -10 14 -10 30 0 17 -4 30 -10 30 -5 0\n-10 9 -10 20 0 11 -4 20 -10 20 -5 0 -10 9 -10 20 0 11 -4 20 -10 20 -5 0 -10\n7 -10 15 0 8 -4 15 -8 15 -5 0 -15 12 -23 27 -14 27 -93 113 -104 113 -3 0\n-17 11 -31 25 -14 14 -29 25 -34 25 -5 0 -15 6 -22 13 -20 19 -118 64 -168 77\n-25 6 -59 16 -76 21 -37 11 -209 10 -244 -1z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            }
+          }
+        ])
+      })
     ],
     1
   )
@@ -41173,6 +41654,121 @@ var render = function() {
           )
         ]
       )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-app",
+    [
+      _c("v-simple-table", {
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function() {
+              return [
+                _c("thead", [
+                  _c("tr", [
+                    _c("th", { staticClass: "text-left" }, [
+                      _vm._v(
+                        "\n                    Residence\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "text-left" }, [
+                      _vm._v("\n                    Resident\n                ")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "text-left" }, [
+                      _vm._v("\n                    Price\n                ")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(_vm.tableData.invoice_data.residences.title)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          _vm.tableData.invoice_data.resident.resident_title
+                            .name
+                        ) +
+                          ". " +
+                          _vm._s(_vm.tableData.invoice_data.resident.name)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(_vm.tableData.invoice_data.residences.price)
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", { attrs: { rowspan: "3" } }),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Subtotal:")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(_vm.tableData.invoice_data.residences.price)
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Tax:")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.tableData.tax))])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Total:")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.tableData.total))])
+                  ])
+                ])
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
     ],
     1
   )
@@ -102223,6 +102819,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/invoice.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/invoice.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _invoice_vue_vue_type_template_id_40b26632_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./invoice.vue?vue&type=template&id=40b26632&scoped=true& */ "./resources/js/components/invoice.vue?vue&type=template&id=40b26632&scoped=true&");
+/* harmony import */ var _invoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./invoice.vue?vue&type=script&lang=js& */ "./resources/js/components/invoice.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _invoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _invoice_vue_vue_type_template_id_40b26632_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _invoice_vue_vue_type_template_id_40b26632_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "40b26632",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/invoice.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/invoice.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/invoice.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_invoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./invoice.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/invoice.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_invoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/invoice.vue?vue&type=template&id=40b26632&scoped=true&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/invoice.vue?vue&type=template&id=40b26632&scoped=true& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_invoice_vue_vue_type_template_id_40b26632_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./invoice.vue?vue&type=template&id=40b26632&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/invoice.vue?vue&type=template&id=40b26632&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_invoice_vue_vue_type_template_id_40b26632_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_invoice_vue_vue_type_template_id_40b26632_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/residence.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/residence.vue ***!
@@ -102361,6 +103026,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/viewInvoice.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/viewInvoice.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _viewInvoice_vue_vue_type_template_id_1270ebcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true& */ "./resources/js/components/viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true&");
+/* harmony import */ var _viewInvoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewInvoice.vue?vue&type=script&lang=js& */ "./resources/js/components/viewInvoice.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _viewInvoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _viewInvoice_vue_vue_type_template_id_1270ebcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _viewInvoice_vue_vue_type_template_id_1270ebcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1270ebcd",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/viewInvoice.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/viewInvoice.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/viewInvoice.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_viewInvoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./viewInvoice.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/viewInvoice.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_viewInvoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_viewInvoice_vue_vue_type_template_id_1270ebcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/viewInvoice.vue?vue&type=template&id=1270ebcd&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_viewInvoice_vue_vue_type_template_id_1270ebcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_viewInvoice_vue_vue_type_template_id_1270ebcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/plugins/vuetify.js":
 /*!*****************************************!*\
   !*** ./resources/js/plugins/vuetify.js ***!
@@ -102401,6 +103135,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_accommodations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/accommodations */ "./resources/js/components/accommodations.vue");
 /* harmony import */ var _components_resident__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/resident */ "./resources/js/components/resident.vue");
 /* harmony import */ var _components_residence__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/residence */ "./resources/js/components/residence.vue");
+/* harmony import */ var _components_invoice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/invoice */ "./resources/js/components/invoice.vue");
+/* harmony import */ var _components_viewInvoice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/viewInvoice */ "./resources/js/components/viewInvoice.vue");
+
+
 
 
 
@@ -102428,6 +103166,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       name: 'residence',
       path: '/residence',
       component: _components_residence__WEBPACK_IMPORTED_MODULE_5__["default"]
+    }, {
+      name: 'invoice',
+      path: '/invoice',
+      component: _components_invoice__WEBPACK_IMPORTED_MODULE_6__["default"]
+    }, {
+      name: 'view_invoice',
+      path: '/invoice/:id',
+      component: _components_viewInvoice__WEBPACK_IMPORTED_MODULE_7__["default"],
+      props: true
     }]
   }]
 });
