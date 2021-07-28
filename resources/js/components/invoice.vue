@@ -11,7 +11,6 @@
                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                              width="20" height="20" viewBox="0 0 840.000000 859.000000"
                              preserveAspectRatio="xMidYMid meet">
-
                             <g transform="translate(0.000000,859.000000) scale(0.100000,-0.100000)"
                                fill="#000000" stroke="none">
                                 <path d="M4030 6498 c-107 -3 -231 -11 -275 -17 -44 -7 -109 -16 -145 -20 -72
@@ -193,13 +192,11 @@
                             </g>
                         </svg>
                     </a>
-
                 </div>
             </template>
         </v-data-table>
     </v-app>
 </template>
-
 <script>
     export default {
         name: "invoice",

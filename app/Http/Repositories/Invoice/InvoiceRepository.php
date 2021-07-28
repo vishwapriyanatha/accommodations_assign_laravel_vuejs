@@ -9,11 +9,18 @@ class InvoiceRepository implements InvoiceRepositoryInterface
 {
     private $residentResidence;
 
+    /**
+     * InvoiceRepository constructor.
+     * @param ResidentResidence $residentResidence
+     */
     public function __construct(ResidentResidence $residentResidence)
     {
         $this->residentResidence = $residentResidence;
     }
 
+    /**
+     * @return mixed
+     */
     public function index()
     {
         return $this->residentResidence
@@ -22,6 +29,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             ->get();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function show($id)
     {
         return $this->residentResidence

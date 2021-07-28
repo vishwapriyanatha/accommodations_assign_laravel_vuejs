@@ -10,7 +10,6 @@
             class="elevation-1">
             <template v-slot:item.id="{ item }">
                 <div class="service-action" align="right">
-
                     <a class="danger" href="#" title="Remove" @click.prevent="itemAction('delete',item)">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -45,8 +44,6 @@
                             <g></g>
 </svg>
                     </a>
-
-
                     <a title="Edit" class="normal" href="#" @click.prevent="itemAction('edit',item)">
                         <svg data-v-629e596e="" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15" height="15"
@@ -79,7 +76,6 @@
                             <g data-v-629e596e=""></g>
                 </svg>
                     </a>
-
                 </div>
             </template>
         </v-data-table>
@@ -121,7 +117,6 @@
                                         <span class="error-font">{{ errors[0] }}</span>
                                     </ValidationProvider>
                                 </div>
-
                                 <v-col class="text-right" cols="12" sm="4">
                                     <div class="my-2">
                                         <v-btn small color="primary" type="submit">

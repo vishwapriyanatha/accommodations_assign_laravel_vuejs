@@ -41,7 +41,6 @@
                             <g data-v-629e596e=""></g>
                 </svg>
                     </a>
-
                 </div>
             </template>
         </v-data-table>
@@ -57,7 +56,6 @@
                     <ValidationObserver ref="observer" tag="form" v-slot="{handleSubmit}">
                         <form @submit.prevent="handleSubmit(submitForm)">
                             <div class="modal-body">
-
                                 <input type="hidden" v-model="formData.id"/>
                                 <div class="form-group">
                                     <label>Title*</label>
@@ -129,7 +127,6 @@
                                         <span class="error-font">{{ errors[0] }}</span>
                                     </ValidationProvider>
                                 </div>
-
                             </div>
                             <div class="modal-footer">
                                 <v-col class="text-right" cols="12" sm="4">
@@ -140,7 +137,6 @@
                                     </div>
                                 </v-col>
                             </div>
-
                         </form>
                     </ValidationObserver>
                 </div>

@@ -41,7 +41,6 @@
                             <g data-v-629e596e=""></g>
                 </svg>
                     </a>
-
                 </div>
             </template>
         </v-data-table>
@@ -112,7 +111,6 @@
                     address: '',
                     price: 0
                 }
-
             }
         },
         methods: {
