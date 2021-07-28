@@ -16,9 +16,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{tableData.invoice_data.residences.title}}</td>
-                    <td>{{tableData.invoice_data.resident.resident_title.name}}. {{tableData.invoice_data.resident.name}}</td>
+                <tr v-if="tableData.invoice_data">
+                    <td>{{ tableData.invoice_data.residences.title }}</td>
+                    <td>{{ tableData.invoice_data.resident.resident_title.name }}. {{ tableData.invoice_data.resident.name }}</td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -26,16 +26,16 @@
                 <tr>
                     <td rowspan="3"></td>
                     <td>Subtotal:</td>
-                    <td>{{tableData.invoice_data.residences.price}}</td>
+                    <td v-if="tableData.invoice_data">{{ tableData.invoice_data.residences.price }}</td>
                 </tr>
                 <tr>
                     <td>Tax:</td>
-                    <td>{{tableData.tax}}</td>
+                    <td>{{ tableData.tax }}</td>
                 </tr>
 
                 <tr>
                     <td>Total:</td>
-                    <td>{{tableData.total}}</td>
+                    <td>{{ tableData.total }}</td>
                 </tr>
                 </tbody>
             </template>
@@ -58,7 +58,7 @@
                 });
             }
         },
-        mounted() {
+        beforeMount() {
             this.getInvoice();
         }
     }

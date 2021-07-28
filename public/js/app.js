@@ -3100,7 +3100,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {
+  beforeMount: function beforeMount() {
     this.getInvoice();
   }
 });
@@ -41706,26 +41706,28 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("tbody", [
-                  _c("tr", [
-                    _c("td", [
-                      _vm._v(
-                        _vm._s(_vm.tableData.invoice_data.residences.title)
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          _vm.tableData.invoice_data.resident.resident_title
-                            .name
-                        ) +
-                          ". " +
-                          _vm._s(_vm.tableData.invoice_data.resident.name)
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td")
-                  ])
+                  _vm.tableData.invoice_data
+                    ? _c("tr", [
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(_vm.tableData.invoice_data.residences.title)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(
+                              _vm.tableData.invoice_data.resident.resident_title
+                                .name
+                            ) +
+                              ". " +
+                              _vm._s(_vm.tableData.invoice_data.resident.name)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td")
+                      ])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("tbody", [
@@ -41734,11 +41736,13 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v("Subtotal:")]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        _vm._s(_vm.tableData.invoice_data.residences.price)
-                      )
-                    ])
+                    _vm.tableData.invoice_data
+                      ? _c("td", [
+                          _vm._v(
+                            _vm._s(_vm.tableData.invoice_data.residences.price)
+                          )
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("tr", [
