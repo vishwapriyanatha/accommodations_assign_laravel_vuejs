@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{tableData.invoice_data.residences.title}}</td>
                     <td>{{tableData.invoice_data.resident.resident_title.name}}. {{tableData.invoice_data.resident.name}}</td>
-                    <td>{{tableData.invoice_data.residences.price}}</td>
+                    <td></td>
                 </tr>
                 </tbody>
                 <tbody>
@@ -29,13 +29,11 @@
                     <td>{{tableData.invoice_data.residences.price}}</td>
                 </tr>
                 <tr>
-                    <td></td>
                     <td>Tax:</td>
                     <td>{{tableData.tax}}</td>
                 </tr>
 
                 <tr>
-                    <td></td>
                     <td>Total:</td>
                     <td>{{tableData.total}}</td>
                 </tr>
