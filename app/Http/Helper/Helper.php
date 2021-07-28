@@ -12,8 +12,12 @@ class Helper
      */
     public static function countTax($value = 0)
     {
+        $return = 0;
+
         if (is_numeric($value)) {
-            return ($value * 10) / 100;
+            $return = ($value * 10) / 100;
         }
+
+        return $return;
     }
 }
