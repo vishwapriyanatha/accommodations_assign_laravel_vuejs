@@ -9,7 +9,7 @@
 
 ## About project
 - Can create resident, residence and assing to each resident and residence
-- simple invoice for each assing residence
+- Simple invoice for each assing residence
 
 ## Setup project
 - git clone the project
